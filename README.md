@@ -1,24 +1,20 @@
-# Spring-activeMQ
-  在业务逻辑的异步处理，系统解耦，分布式通信以及控制高并发的场景下，消息队列有着广泛的应用。本项目基于Spring这一平台，整合流行的开源消息队列中间件ActiveMQ,实现一个向ActiveMQ添加和读取消息的功能。并比较了两种模式：生产者-消费者模式和发布-订阅模式的区别。
-包含的特性如下：  
+# Spring-rabbitMQ
+  在业务逻辑的异步处理，系统解耦，分布式通信以及控制高并发的场景下，消息队列有着广泛的应用。本项目基于Spring的AMQP模块，整合流行的开源消息队列中间件rabbitMQ,实现一个向rabbitMQ添加和读取消息的功能。并比较了两种模式：生产者-消费者模式和发布-订阅模式的区别。AMQP作为比JMS更加高级的消息协议，支持更多的消息路由和消息模式。
   
-1.使用时，将war文件放入tomcat的webapps目录下，启动服务器，开启activeMQ，访问http://localhost:8080/Spring-activeMQ/demo  ，我们可以在页面顶端看到一个黑色的控制台，用于监控消息的内容，如下图：
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1116/081248_7013fad4_1110335.jpeg "在这里输入图片标题")
+包含的特性如下：
 
-2 在项目中，我们为消息的生产者和发布者分别注册了两个消费者和订阅者，当有消息到达activeMQ时，消费者和订阅者会自动获取对应的消息，可以在前端控制台看到结果（前端页面控制台是基于websocket全双工通信协议实现的，可用于将服务器端的信息主动推送到浏览器，在本项目中不做重点介绍）；
+  ![输入图片说明](https://github.com/shenzhanwang/Spring-rabbitMQ/blob/master/%E6%88%AA%E5%9B%BE/1.png"生产者消费者模型")
+1.如上图，生产者消费者模型：添加了一个队列，并创建了两个消费者用于监听队列消息，我们发现，当有消息到达时，两个消费者会交替收到消息。这一过程虽然不用创建交换机，但会使用默认的交换机，并用默认的直连（default-direct）策略连接队列；
+  ![输入图片说明](https://github.com/shenzhanwang/Spring-rabbitMQ/blob/master/%E6%88%AA%E5%9B%BE/3.png"")
 
- 
-3.填入要发送的消息，点击生产消息可以向消息队列添加一条消息，我们可以试着添加了四条消息，并观察控制台结果，可以发现每个消息只被某一个消费者接收； 
+2.如下图，发布订阅模型，添加两个队列，分别各用一个消费者监听，设置一个交换机，类型为广播（fanout），交换机会将收到的消息广播给所有相连的队列：
 
- 
-4.重复以上操作发布四条消息，可以看到订阅者的输出结果，表明每个发布的消息可以被两个订阅者全部接收；
- 
-   
-5.以上结果表明，向队列生产的每条消息，只能被某一个消费者读取，而发布的消息，可以被每个订阅者重复读取，这是两种模式最大的区别，实际应用中要根据情况来选择。
- 
- ![输入图片说明](http://git.oschina.net/uploads/images/2016/1116/081301_8afc2c36_1110335.jpeg "在这里输入图片标题")
+![输入图片说明](https://github.com/shenzhanwang/Spring-rabbitMQ/blob/master/%E6%88%AA%E5%9B%BE/2.png"发布订阅模型")
+![输入图片说明](https://github.com/shenzhanwang/Spring-rabbitMQ/blob/master/%E6%88%AA%E5%9B%BE/8.png"在这里输入图片标题")
+![输入图片说明](https://github.com/shenzhanwang/Spring-rabbitMQ/blob/master/%E6%88%AA%E5%9B%BE/4.png"fanout路由模型")
 
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1116/081309_5446619e_1110335.jpeg "在这里输入图片标题")
+3.进入http://localhost:8080/Spring-rabbitMQ/demo 可向rabbitMQ发送消息，如下图：
+![输入图片说明](https://github.com/shenzhanwang/Spring-rabbitMQ/blob/master/%E6%88%AA%E5%9B%BE/7.png"fanout路由模型")
 
  
 
