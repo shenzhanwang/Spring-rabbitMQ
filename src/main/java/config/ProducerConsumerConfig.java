@@ -21,49 +21,4 @@ public class ProducerConsumerConfig {
 	       return queue;
 	    }
 	    
-	    //消费者监听器1
-	    @Bean
-	    public QueueListener1 queueListener1() {
-	    	return new QueueListener1();
-	    }
-	    
-	    @Bean
-	    public MessageListenerAdapter mailListenerAdapter() {
-		    MessageListenerAdapter adapter = new MessageListenerAdapter();
-		    adapter.setDelegate(queueListener1());
-		    adapter.setDefaultListenerMethod("displayMail");
-		    return adapter;
-	    }
-	    
-	    @Bean
-	    public SimpleMessageListenerContainer messageListenerContainer() {
-		    SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-		    container.setConnectionFactory(rabbitconfig.connectionFactory());
-		    container.setMessageListener(mailListenerAdapter());
-		    container.setQueues(myQueue());
-		    return container;
-	    }
-	    
-	    //消费者监听器2
-	    @Bean
-	    public QueueListener2 queueListener2() {
-	    	return new QueueListener2();
-	    }
-	    
-	    @Bean
-	    public MessageListenerAdapter mailListenerAdapter2() {
-		    MessageListenerAdapter adapter = new MessageListenerAdapter();
-		    adapter.setDelegate(queueListener2());
-		    adapter.setDefaultListenerMethod("displayMail");
-		    return adapter;
-	    }
-	    
-	    @Bean
-	    public SimpleMessageListenerContainer messageListenerContainer2() {
-		    SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-		    container.setConnectionFactory(rabbitconfig.connectionFactory());
-		    container.setMessageListener(mailListenerAdapter2());
-		    container.setQueues(myQueue());
-		    return container;
-	    }
 }

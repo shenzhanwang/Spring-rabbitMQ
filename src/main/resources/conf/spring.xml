@@ -18,4 +18,5 @@
 	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 	<context:component-scan base-package="config" />
 	<context:component-scan base-package="service.impl" />
+	<context:component-scan base-package="rabbitMQ.listener" />
 </beans>

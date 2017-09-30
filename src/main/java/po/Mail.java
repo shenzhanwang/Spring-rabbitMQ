@@ -7,7 +7,7 @@ public class Mail implements Serializable{
 	private static final long serialVersionUID = -8140693840257585779L;
 	private String mailId;
 	private String country;
-	private double weight;
+	private Double weight;
 	
 	
 	public Mail() {

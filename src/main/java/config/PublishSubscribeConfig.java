@@ -51,49 +51,4 @@ public class PublishSubscribeConfig {
  		return binding;
  	}
  	
- 	 //订阅者监听器1
-    @Bean
-    public SubscribeListener1 subscribeListener1() {
-    	return new SubscribeListener1();
-    }
-    
-    @Bean
-    public MessageListenerAdapter mailListenerAdapter() {
-	    MessageListenerAdapter adapter = new MessageListenerAdapter();
-	    adapter.setDelegate(subscribeListener1());
-	    adapter.setDefaultListenerMethod("subscribe");
-	    return adapter;
-    }
-    
-    @Bean
-    public SimpleMessageListenerContainer messageListenerContainer() {
-	    SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-	    container.setConnectionFactory(rabbitconfig.connectionFactory());
-	    container.setMessageListener(mailListenerAdapter());
-	    container.setQueues(myQueue1());
-	    return container;
-    }
-    
-    //订阅者监听器2
-    @Bean
-    public SubscribeListener2 subscribeListener2() {
-    	return new SubscribeListener2();
-    }
-    
-    @Bean
-    public MessageListenerAdapter mailListenerAdapter2() {
-	    MessageListenerAdapter adapter = new MessageListenerAdapter();
-	    adapter.setDelegate(subscribeListener2());
-	    adapter.setDefaultListenerMethod("subscribe");
-	    return adapter;
-    }
-    
-    @Bean
-    public SimpleMessageListenerContainer messageListenerContainer2() {
-	    SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-	    container.setConnectionFactory(rabbitconfig.connectionFactory());
-	    container.setMessageListener(mailListenerAdapter2());
-	    container.setQueues(myQueue2());
-	    return container;
-    }
 }

@@ -19,10 +19,11 @@
   <body>
 <div class="container">
   <div class="row">
-	  <div class="col-md-12">
+	  <div class="col-md-6">
 	  	<div class="panel panel-danger">
 			<div class="panel-heading">生产者-消费者模型，向队列生产消息</div>
 			<div class="panel-body">
+			<img src="./img/1.png" width="100%" alt="生产者-消费者模型" class="img-rounded">
 						<form id="f1" class="form-horizontal" role="form">
 							<div class="form-group">
 								<label for="mailid" class="col-sm-2 control-label">mailid</label>
@@ -42,22 +43,22 @@
 									<input type="text" name="weight" class="form-control" id="weight" placeholder="weight">
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<button id="produce" type="button" class="btn btn-default">生产消息</button>
 								</div>
 							</div>
+							
 						</form>
 					</div>
 </div>
 	  </div>
-  </div>
-  
-  <div class="row">
-	  <div class="col-md-12">
-	  	<div class="panel panel-danger">
+	  <div class="col-md-6">
+	  	<div class="panel panel-success">
 			<div class="panel-heading">发布-订阅模型，向所有队列广播消息</div>
 			<div class="panel-body">
+			<img src="./img/2.png"  width="100%" alt="发布-订阅模型" class="img-rounded">
 						<form id="f2" class="form-horizontal" role="form">
 							<div class="form-group">
 								<label for="mailid" class="col-sm-2 control-label">mailid</label>
@@ -86,6 +87,92 @@
 					</div>
 </div>
 	  </div>
+	  
+  </div>
+  
+  <div class="row">
+	  <div class="col-md-6">
+	  	<div class="panel panel-info">
+			<div class="panel-heading">直连交换机模型，向指定的routing key发送消息</div>
+			<div class="panel-body">
+			<img src="./img/3.png" width="100%" alt="发布-订阅模型" class="img-rounded">
+						<form id="f3" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="mailid" class="col-sm-2 control-label">mailid</label>
+								<div class="col-sm-10">
+									<input type="text" name="mailId" class="form-control" id="mailid" placeholder="mailid">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="country" class="col-sm-2 control-label">country</label>
+								<div class="col-sm-10">
+									<input type="text" name="country" class="form-control" id="country" placeholder="country">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="weight" class="col-sm-2 control-label">weight</label>
+								<div class="col-sm-10">
+									<input type="text" name="weight" class="form-control" id="weight" placeholder="weight">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="weight" class="col-sm-3 control-label">Routing key</label>
+								<div class="col-sm-9">
+									<select class="form-control" name="routingkey">
+									  <option value="orange">orange</option>
+									  <option value="black">black</option>
+									  <option value="green">green</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button id="direct" type="button" class="btn btn-default">发布消息</button>
+								</div>
+							</div>
+						</form>
+					</div>
+</div>
+	  </div>
+	  <div class="col-md-6">
+	  	<div class="panel panel-default">
+			<div class="panel-heading">topic交换机模型，向匹配的routing key发送消息</div>
+			<div class="panel-body">
+			<img src="./img/4.png" width="100%" alt="发布-订阅模型" class="img-rounded">
+						<form id="f4" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="mailid" class="col-sm-2 control-label">mailid</label>
+								<div class="col-sm-10">
+									<input type="text" name="mailId" class="form-control" id="mailid" placeholder="mailid">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="country" class="col-sm-2 control-label">country</label>
+								<div class="col-sm-10">
+									<input type="text" name="country" class="form-control" id="country" placeholder="country">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="weight" class="col-sm-2 control-label">weight</label>
+								<div class="col-sm-10">
+									<input type="text" name="weight" class="form-control" id="weight" placeholder="weight">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="weight" class="col-sm-3 control-label">Routing key</label>
+								<div class="col-sm-9">
+									<input type="text" name="routingkey" class="form-control" id="weight" placeholder="routingkey"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button id="mytopic" type="button" class="btn btn-default">发布消息</button>
+								</div>
+							</div>
+						</form>
+					</div>
+</div>
+	  </div>
   </div>
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -105,21 +192,20 @@
 	    	alert("发布成功");
 	    });
 	  });
+	  
+	  $("#direct").click(function(){
+	    $.post("direct",$("#f3").serialize(),function(){
+	    	alert("发布成功");
+	    });
+	  });
+	  
+	  $("#mytopic").click(function(){
+	    $.post("mytopic",$("#f4").serialize(),function(){
+	    	alert("发布成功");
+	    });
+	  });
 	});
 
-</script>
-<script>
-    $(document).ready(function() {
-        // 指定websocket路径
-        var websocket = new WebSocket('ws://localhost:8080/Spring-activeMQ/ws');
-        websocket.onmessage = function(event) {
-       	 var data=JSON.parse(event.data);
-            // 接收服务端的实时日志并添加到HTML页面中
-            $("#log-container div").append(data.text + "<p> </p>");
-            // 滚动条滚动到最低部
-            $("#log-container").scrollTop($("#log-container div").height() - $("#log-container").height());
-        };
-    });
 </script>
   </body>
 </html>
