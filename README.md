@@ -28,6 +28,7 @@
 5. 进入http://localhost:8080/Spring-rabbitMQ/demo 可向rabbitMQ发送消息，如下图：
  ![输入图片说明](https://git.oschina.net/uploads/images/2017/0902/122918_5adae2c4_1110335.png "QQ截图20170902122553.png")
 
+
 ### 附录：个人作品索引目录（持续更新）
 
 #### 基础篇:职业化，从做好OA系统开始
@@ -78,8 +79,3 @@
 ### 网店入口
 [我的网店](https://www.fageka.com/Store/Index/shop/id/1zxrETbHcz)
    
-
- 
-
-
-
